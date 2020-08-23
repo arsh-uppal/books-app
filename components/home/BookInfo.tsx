@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+
+// storage
+import AsyncStorage from "@react-native-community/async-storage";
 
 // ui-paper
 import {
@@ -48,12 +51,17 @@ const BookInfo: React.SFC<BookInfoProps> = ({ route, navigation }) => {
     });
   }, []);
 
-  const handleBookMark = () => {
+  const handleBookMark = async () => {
     setBookmarkBtnCheck(true);
     setVisible(true);
+    const bookMarkDataTemp = {
+      title: title,
+      subtitle: subtitle,
+      img: img,
+    };
+    const jsonValue = JSON.stringify(bookMarkDataTemp);
+    await AsyncStorage.setItem("@storage_Key", jsonValue);
   };
-
-  console.log(itemId);
   return (
     <>
       <Card style={styles.container}>

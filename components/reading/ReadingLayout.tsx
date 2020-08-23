@@ -22,7 +22,6 @@ const ReadingLayout: React.SFC<ReadingLayoutProps> = () => {
     const res = fetchBooks("harry+potter", "3");
     res.then((data) => {
       data.map((book, id) => {
-        console.log(book.volumeInfo.title);
         bookList.push(
           <Card style={styles.container} key={id}>
             <Card.Title

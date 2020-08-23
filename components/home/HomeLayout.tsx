@@ -1,9 +1,9 @@
 import React from "react";
 
-import { StyleSheet, Button, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 // ui-paper
-import { Avatar, Card, Title, Paragraph } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 // snap-carousel
 import Carousel from "react-native-snap-carousel";
@@ -36,7 +36,6 @@ const HomeLayout: React.SFC<HomeLayoutProps> = ({
   const getCards = () => {
     const data: JSX.Element[] = [];
     booksInfo.map((book: { id: any }) => {
-      console.log(book.id);
       data.push(<Text>{book.id}</Text>);
     });
     return data;
@@ -46,7 +45,6 @@ const HomeLayout: React.SFC<HomeLayoutProps> = ({
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log(item.volumeInfo.title);
           navigation.navigate("InfoScreen", { bookDetailLinks: item.selfLink });
         }}
         style={styles.touchControl}

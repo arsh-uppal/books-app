@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Text } from "react-native";
+import BookmarkLayout from "../components/bookmarks/BookmarkLayout";
 
 export interface BookmarksScreenProps {}
 
-const BookmarksScreen: React.SFC<BookmarksScreenProps> = () => {
-  return <Text>Bookmarks Screen</Text>;
+const BookmarksScreen: React.SFC<BookmarksScreenProps> = ({ navigation }) => {
+  return <BookmarkLayout navigation={navigation} />;
 };
 
 export default BookmarksScreen;

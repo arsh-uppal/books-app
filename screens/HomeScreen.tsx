@@ -1,17 +1,14 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView, FlatList, StatusBar } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 
 // easy-grid
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Row, Grid } from "react-native-easy-grid";
 
 // components
 import Search from "../components/home/Search";
 import Featured from "../components/home/Featured";
 import OtherCategories from "../components/home/OtherCategories";
-
-// other
-import { Text } from "../components/Themed";
 
 // navigation
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -78,6 +75,6 @@ const styles = StyleSheet.create({
   },
   nonFiction: {
     backgroundColor: "pink",
-    top: -2,
+    top: -5,
   },
 });

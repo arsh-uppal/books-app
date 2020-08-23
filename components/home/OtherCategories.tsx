@@ -27,7 +27,6 @@ export default function OtherCategories(props: {
   const [booksInfo, setBooksInfo] = useState<any>([]);
 
   useEffect(() => {
-    console.log(props.type);
     const data = fetchBooks(props.type);
     data.then((books) => {
       setBooksInfo(books);
@@ -45,7 +44,7 @@ export default function OtherCategories(props: {
         booksInfo={booksInfo}
         navigation={props.navigation}
         styles={styles}
-        itemWidth={130}
+        itemWidth={120}
       />
     </View>
   );
@@ -71,6 +70,11 @@ const styles = StyleSheet.create({
     width: 110,
     borderBottomColor: "black",
   },
+  bookTitle: {
+    fontWeight: "bold",
+    fontSize: 10,
+    top: 2,
+  },
   bookImg: {
     width: 110,
     height: 150,
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    fontSize: 14,
+    fontSize: 15,
     marginLeft: 30,
   },
 });

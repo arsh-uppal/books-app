@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   },
   bookTitle: {
     fontWeight: "bold",
-    fontSize: 17,
+    fontSize: 12,
+    top: 5,
   },
   bookImg: {
     width: 160,

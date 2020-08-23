@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { Searchbar } from "react-native-paper";
 
 // other
-import { Text, View } from "../Themed";
+import { View } from "../Themed";
 
 export interface SearchProps {}
 
