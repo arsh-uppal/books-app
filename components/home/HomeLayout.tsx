@@ -1,9 +1,9 @@
 import React from "react";
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, Button, TouchableOpacity } from "react-native";
 
 // ui-paper
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Avatar, Card, Title, Paragraph } from "react-native-paper";
 
 // snap-carousel
 import Carousel from "react-native-snap-carousel";
@@ -17,6 +17,10 @@ export interface HomeLayoutProps {
   SLIDER_WIDTH: number;
   ITEM_HEIGHT: number;
   ITEM_WIDTH: number;
+  booksInfo: any;
+  navigation: any;
+  styles: any;
+  itemWidth: number;
 }
 
 const HomeLayout: React.SFC<HomeLayoutProps> = ({
@@ -24,56 +28,55 @@ const HomeLayout: React.SFC<HomeLayoutProps> = ({
   SLIDER_WIDTH,
   ITEM_WIDTH,
   ITEM_HEIGHT,
+  booksInfo,
+  navigation,
+  styles,
+  itemWidth,
 }: HomeLayoutProps) => {
-  const styles = StyleSheet.create({
-    carouselContainer: {},
-    itemContainer: {
-      width: ITEM_WIDTH,
-      height: ITEM_HEIGHT,
-      alignItems: "center",
-    },
-    itemLabel: {
-      color: "white",
-    },
-    bookCard: {
-      width: "100%",
-      height: "100%",
-    },
-    bookImg: {
-      height: "80%",
-      width: 100,
-    },
-    bookAction: {
-      height: "20%",
-    },
-  });
+  const getCards = () => {
+    const data: JSX.Element[] = [];
+    booksInfo.map((book: { id: any }) => {
+      console.log(book.id);
+      data.push(<Text>{book.id}</Text>);
+    });
+    return data;
+  };
 
-  const _renderItem = () => {
+  const _renderItem = ({ item, index }) => {
     return (
-      <View style={styles.itemContainer}>
-        <Card style={styles.bookCard}>
-          <Card.Cover
-            style={styles.bookImg}
-            resizeMode={`center`}
-            source={{
-              uri:
-                "https://books.google.com/books/content?id=agHRDwAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-            }}
-          />
-          <Card.Content style={styles.bookAction}>
-            <Paragraph>Book Name</Paragraph>
-          </Card.Content>
-        </Card>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(item.volumeInfo.title);
+          navigation.navigate("InfoScreen", { bookDetailLinks: item.selfLink });
+        }}
+        style={styles.touchControl}
+      >
+        <View style={styles.itemContainer}>
+          <Card style={styles.bookCard}>
+            <Card.Cover
+              style={styles.bookImg}
+              resizeMode={`center`}
+              source={{
+                uri: item.volumeInfo.imageLinks.smallThumbnail,
+              }}
+            />
+            <Card.Content style={styles.bookAction}>
+              <Text numberOfLines={1} style={styles.bookTitle}>
+                {item.volumeInfo.title}
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <Carousel
-      data={DATA}
+      data={booksInfo}
       renderItem={_renderItem}
       sliderWidth={SLIDER_WIDTH}
-      itemWidth={ITEM_WIDTH}
+      itemWidth={itemWidth}
       containerCustomStyle={styles.carouselContainer}
       inactiveSlideShift={0}
       onSnapToItem={(index) => {}}

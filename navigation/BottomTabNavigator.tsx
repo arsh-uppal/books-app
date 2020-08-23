@@ -9,6 +9,10 @@ import Colors from "../constants/Colors";
 
 // components
 import HomeScreen from "../screens/HomeScreen";
+import ReadingScreen from "../screens/ReadingScreen";
+import BookmarksScreen from "../screens/BookmarksScreen";
+import ReadScreen from "../screens/ReadScreen";
+import BookInfo from "../components/home/BookInfo";
 import { FeatherIcons } from "../components/shared/IconsLibs";
 
 // others
@@ -78,11 +82,16 @@ const HomeTabStack = createStackNavigator<HomeTabParamList>();
 
 function HomeTabNavigator() {
   return (
-    <HomeTabStack.Navigator>
+    <HomeTabStack.Navigator initialRouteName="HomeTabScreen">
       <HomeTabStack.Screen
         name="HomeTabScreen"
         component={HomeScreen}
         options={{ headerTitle: "Home", headerShown: false }}
+      />
+      <HomeTabStack.Screen
+        name="InfoScreen"
+        component={BookInfo}
+        options={{ headerTitle: "Details", headerShown: true }}
       />
     </HomeTabStack.Navigator>
   );
@@ -95,7 +104,7 @@ function ReadingTabNavigator() {
     <ReadingTabStack.Navigator>
       <ReadingTabStack.Screen
         name="ReadingTabScreen"
-        component={HomeScreen}
+        component={ReadingScreen}
         options={{ headerTitle: "Reading", headerShown: true }}
       />
     </ReadingTabStack.Navigator>
@@ -109,7 +118,7 @@ function BookmarkTabNavigator() {
     <BookmarkTabStack.Navigator>
       <BookmarkTabStack.Screen
         name="BookmarkTabScreen"
-        component={HomeScreen}
+        component={BookmarksScreen}
         options={{ headerTitle: "Bookmarks", headerShown: true }}
       />
     </BookmarkTabStack.Navigator>
@@ -123,7 +132,7 @@ function ReadTabNavigator() {
     <ReadTabStack.Navigator>
       <ReadTabStack.Screen
         name="ReadTabScreen"
-        component={HomeScreen}
+        component={ReadScreen}
         options={{ headerTitle: "Reading", headerShown: true }}
       />
     </ReadTabStack.Navigator>

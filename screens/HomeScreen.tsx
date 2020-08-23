@@ -6,27 +6,47 @@ import { SafeAreaView, FlatList, StatusBar } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 // components
-import Featured from "../components/home/Featured";
 import Search from "../components/home/Search";
+import Featured from "../components/home/Featured";
+import OtherCategories from "../components/home/OtherCategories";
 
 // other
 import { Text } from "../components/Themed";
 
-export default function HomeScreen() {
+// navigation
+import { StackNavigationProp } from "@react-navigation/stack";
+import { HomeTabParamList } from "../types";
+
+type ScreenNavigationProp = StackNavigationProp<
+  HomeTabParamList,
+  "HomeTabScreen"
+>;
+
+// will fix the navigation warning later
+
+export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Grid>
         <Row size={10} style={styles.search}>
           <Search />
         </Row>
-        <Row size={40} style={styles.featured}>
-          <Featured />
+        <Row size={36} style={styles.featured}>
+          <Featured navigation={navigation} />
         </Row>
-        <Row size={25} style={styles.webDev}>
-          <Text>Web dev</Text>
+        <Row size={27} style={styles.webDev}>
+          <OtherCategories
+            navigation={navigation}
+            name={"Best fiction"}
+            type={"fiction"}
+          />
         </Row>
-        <Row size={25} style={styles.nonFiction}>
-          <Text>Non Fiction</Text>
+        <Row size={27} style={styles.nonFiction}>
+          <OtherCategories
+            navigation={navigation}
+            name={"Hand picked non-fiction"}
+            type={"inspiration"}
+          />
         </Row>
       </Grid>
     </SafeAreaView>
@@ -58,5 +78,6 @@ const styles = StyleSheet.create({
   },
   nonFiction: {
     backgroundColor: "pink",
+    top: -2,
   },
 });

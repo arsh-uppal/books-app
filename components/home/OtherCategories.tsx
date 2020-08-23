@@ -19,11 +19,16 @@ for (let i = 0; i < 10; i++) {
   DATA.push(i);
 }
 
-export default function Featured(props: { navigation: any }) {
+export default function OtherCategories(props: {
+  navigation: any;
+  name: "string";
+  type: "string";
+}) {
   const [booksInfo, setBooksInfo] = useState<any>([]);
 
   useEffect(() => {
-    const data = fetchBooks();
+    console.log(props.type);
+    const data = fetchBooks(props.type);
     data.then((books) => {
       setBooksInfo(books);
     });
@@ -31,7 +36,7 @@ export default function Featured(props: { navigation: any }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Top-rated Science books</Text>
+      <Text style={styles.text}>{props.name}</Text>
       <HomeLayout
         DATA={DATA}
         SLIDER_WIDTH={SLIDER_WIDTH}
@@ -40,7 +45,7 @@ export default function Featured(props: { navigation: any }) {
         booksInfo={booksInfo}
         navigation={props.navigation}
         styles={styles}
-        itemWidth={180}
+        itemWidth={130}
       />
     </View>
   );
@@ -54,37 +59,33 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {},
   itemContainer: {
-    top: "5%",
+    top: "6%",
     alignItems: "center",
-    width: 160,
+    width: 110,
   },
   itemLabel: {
     color: "white",
   },
   bookCard: {
-    height: 250,
-    width: 160,
+    height: 170,
+    width: 110,
     borderBottomColor: "black",
   },
-  bookTitle: {
-    fontWeight: "bold",
-    fontSize: 17,
-  },
   bookImg: {
-    width: 160,
-    height: 220,
+    width: 110,
+    height: 150,
   },
   bookAction: {
-    height: 35,
+    height: 20,
     flex: 1,
   },
   touchControl: {
-    width: 160,
-    left: -120,
+    width: 97,
+    left: -148,
   },
   text: {
     fontWeight: "bold",
-    fontSize: 17,
+    fontSize: 14,
     marginLeft: 30,
   },
 });
